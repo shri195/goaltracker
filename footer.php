@@ -1,6 +1,6 @@
 
 <div class="copyright text-center mt-4">
-  <p>Copyright © <?php echo date('Y'); ?>.<a href="https://www.harbingergroup.com" target="_blank">Harbinger Systems</a>.</p>
+  <p>Copyright © <?php echo date('Y'); ?>.<a href="https://www.harbingergroup.com" target="_blank"> Harbinger Group</a>.</p>
 </div>
 
 </div>

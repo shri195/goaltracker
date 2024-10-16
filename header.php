@@ -52,15 +52,15 @@
                 <li <?php if(basename($_SERVER['PHP_SELF']) == "dashboard.php") echo 'class="active"'; ?>>
                     <a href="dashboard.php">Dashboard</a>
                 </li>
-                <li <?php if(basename($_SERVER['PHP_SELF']) == "vehicle-category.php") echo 'class="active"'; ?>>
+                <!-- <li <?php if(basename($_SERVER['PHP_SELF']) == "vehicle-category.php") echo 'class="active"'; ?>>
                     <a href="vehicle-category.php">Vehicle Category</a>
-                </li>
+                </li> -->
                 <li <?php if(basename($_SERVER['PHP_SELF']) == "vehicle.php") echo 'class="active"'; ?>>
-                    <a href="vehicle.php">Manage In Vehicle</a>
+                    <a href="vehicle.php">Manage Goal Tracker</a>
                 </li>
-                <li <?php if(basename($_SERVER['PHP_SELF']) == "manage-outgoingvehicle.php") echo 'class="active"'; ?>>
+                <!-- <li <?php if(basename($_SERVER['PHP_SELF']) == "manage-outgoingvehicle.php") echo 'class="active"'; ?>>
                     <a href="manage-outgoingvehicle.php">Manage Out Vehicle</a>
-                </li>
+                </li> -->
                 <li <?php if(basename($_SERVER['PHP_SELF']) == "reports.php") echo 'class="active"'; ?>>
                     <a href="reports.php">Reports</a>
                 </li>

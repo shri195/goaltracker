@@ -1,12 +1,12 @@
-<?php $title = "Vehicle";
+<?php $title = "Goal Tracker";
 include "header.php" ?>
   <div class="message"></div>
   <div class="container">
     <div class="admin-content">
       <div class="card">
         <div class="card-header">
-          <h2 class="d-inline">Vehicle List</h2>
-          <a href="add-vehicle.php" class="btn btn-dark float-right">Add New Vehicle</a>
+          <h2 class="d-inline">Goal Tracker List</h2>
+          <a href="add-vehicle.php" class="btn btn-dark float-right">Add New Goal Tracker</a>
         </div>
         <div class="card-body position-relative">
           <div id="table-data">

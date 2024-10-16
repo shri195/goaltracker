@@ -1,10 +1,5 @@
 <?php
 ob_start();
-if(file_exists('../php_files/database.php')){
-	include '../php_files/config.php';
-	header('location: index.php');
-	die();
-}
 ?>
 <!DOCTYPE html>
 <html>

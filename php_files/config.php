@@ -1,5 +1,5 @@
 <?php 
     include "database.php";
 
-    $base_url = "http://localhost/vehicle-parking-yb/";
+    $base_url = "http://localhost/goaltracker/";
 ?>

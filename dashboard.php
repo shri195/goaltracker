@@ -18,7 +18,7 @@ include "header.php";
                 <div class="card-body text-center">
                   <span class="icon"><i class="fas fa-taxi"></i></span>
                   <p class="card-text mb-3"><?php echo $row['incoming_vehicle']; ?></p>
-                  <h5 class="card-title text-white mb-0">Today Incoming Vehicle Entries</h5>
+                  <h5 class="card-title text-white mb-0">Total # Projects</h5>
                 </div>
               </div>
               <?php 
@@ -39,7 +39,7 @@ include "header.php";
                 <div class="card-body text-center">
                   <span class="icon"><i class="fas fa-taxi"></i></span>
                   <p class="card-text mb-3"><?php echo $row['outgoing_vehicle']; ?></p>
-                  <h5 class="card-title text-white mb-0">Today Outgoing Vehicle Entries</h5>
+                  <h5 class="card-title text-white mb-0">Initiated Goal Tracker</h5>
                 </div>
               </div>
               <?php 
@@ -60,7 +60,7 @@ include "header.php";
                 <div class="card-body text-center">
                   <span class="icon"><i class="fas fa-file"></i></span>
                   <p class="card-text mb-3"><?php echo $row['total_category']; ?></p>
-                  <h5 class="card-title text-white mb-0">Vehicle Category</h5>
+                  <h5 class="card-title text-white mb-0">In Review Goal Tracker</h5>
                 </div>
               </div>
               <?php 
@@ -81,7 +81,7 @@ include "header.php";
                 <div class="card-body text-center">
                   <span class="icon"><i class="fas fa-taxi"></i></span>
                   <p class="card-text mb-3"><?php echo $row['total_incoming']; ?></p>
-                  <h5 class="card-title text-white mb-0">Total Incoming Vehicle</h5>
+                  <h5 class="card-title text-white mb-0">In Closure Goal Tracker</h5>
                 </div>
               </div>
               <?php 
@@ -96,7 +96,7 @@ include "header.php";
       <div class="col-md-12">
         <div class="card mt-4">
           <div class="card-header">
-            <h2>Latest Incoming Vehicle</h2>
+            <h2>Latest Projects</h2>
           </div>
           <div class="card-body table-responsive">
             <?php 
