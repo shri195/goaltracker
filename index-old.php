@@ -35,7 +35,7 @@
         <div class="offset-md-3 col-md-6">
           <div class="login-form">
             <div class="card">
-              <div class="card-header p-2" style="background:#1d3557;">
+              <div class="card-header p-2" style="background:#D85C27;">
                 <h2 class="text-center text-white m-2"><?php echo $result[0]['site_name']; ?></h2>
               </div>
               <div class="card-body login-form position-relative">
@@ -51,9 +51,7 @@
                       <label>Password</label>
                       <input type="password" class="form-control password" name="password" id="password" placeholder="Password" required>
                   </div>
-                  <div class="btn-wrapper d-flex align-items-center justify-content-end">
-                    <input type="submit" class="btn text-white" name="login" value="Login" style="background:#DF323F;">
-                  </div>
+                  <input type="submit" class="btn text-white w-100" name="login" value="Login" style="background:#D85C27;">
                 </form>
               </div>
             </div>

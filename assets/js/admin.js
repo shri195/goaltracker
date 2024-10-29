@@ -111,11 +111,8 @@ $(document).ready(function(){
     $('#update-settings').on("submit", function(e){
         e.preventDefault();
         var site_name = $('.site_name').val();
-        var site_currency = $('.site_currency').val();
         if(site_name == ''){
             messageShow("<div class='alert alert-danger'>Site Name Field is Empty.</div>");
-        }else if(site_currency == ''){
-            messageShow("<div class='alert alert-danger'>Currency Field is Empty.</div>");
         }else{
             var formdata = new FormData(this);
             formdata.append('update-settings',1);
@@ -141,23 +138,17 @@ $(document).ready(function(){
     });
 
     //add vehicle category
-    $('#add-Vehiclecategory').on("submit", function(e){
+    $('#add-account').on("submit", function(e){
         e.preventDefault();
         var category_name = $('.cat_name').val();
-        var parking_charge = $('.parking_charge').val();
-        var category_status = $('.cat_status').val();
         if(category_name == ''){
-            messageShow("<div class='alert alert-danger'>Vehicle Category Name Field is Empty.</div>");
-        }else if(parking_charge == ''){
-            messageShow("<div class='alert alert-danger'>Parking Charge Field is Empty.</div>");
-        }else if(category_status == ''){
-            messageShow("<div class='alert alert-danger'>Status Field is Empty.</div>");
+            messageShow("<div class='alert alert-danger'>Account Name Field is Empty.</div>");
         }else{
             var formdata = new FormData(this);
-            formdata.append('add-Vehiclecategory',1);
+            formdata.append('add-account',1);
             document.getElementsByClassName('card-body')[0].innerHTML += loader;
             $.ajax({
-                url: './php_files/vehicle-category.php',
+                url: './php_files/accounts.php',
                 type: 'POST',
                 data: formdata,
                 processData: false,
@@ -166,7 +157,7 @@ $(document).ready(function(){
                 success: function(data){
                     if(data.hasOwnProperty('success')){
                         messageShow("<div class='alert alert-success'>Saved successfully.</div>");
-                        setTimeout(function(){ window.location='vehicle-category.php';}, 2000);
+                        setTimeout(function(){ window.location='manage-accounts.php';}, 2000);
                       }else{
                         messageShow("<div class='alert alert-danger'>"+data.error+"</div>");
                         setTimeout(function(){$('.loader').hide();}, 2000);
@@ -177,23 +168,19 @@ $(document).ready(function(){
     });
 
     //update vehicle category
-    $('#update-Vehiclecategory').on("submit", function(e){
+    $('#update-account').on("submit", function(e){
         e.preventDefault();
         var category_name = $('.cat_name').val();
         var parking_charge = $('.parking_charge').val();
         var category_status = $('.cat_status').val();
         if(category_name == ''){
-            messageShow("<div class='alert alert-danger'>Vehicle Category Name Field is Empty.</div>");
-        }else if(parking_charge == ''){
-            messageShow("<div class='alert alert-danger'>Parking Charge Field is Empty.</div>");
-        }else if(category_status == ''){
-            messageShow("<div class='alert alert-danger'>Status Field is Empty.</div>");
+            messageShow("<div class='alert alert-danger'>Account Name Field is Empty.</div>");
         }else{
             var formdata = new FormData(this);
-            formdata.append('update-Vehiclecategory',1);
+            formdata.append('update-account',1);
             document.getElementsByClassName('card-body')[0].innerHTML += loader;
             $.ajax({
-                url: './php_files/vehicle-category.php',
+                url: './php_files/accounts.php',
                 type: 'POST',
                 data: formdata,
                 processData: false,
@@ -202,7 +189,7 @@ $(document).ready(function(){
                 success: function(data){
                     if(data.hasOwnProperty('success')){
                         messageShow("<div class='alert alert-success'>Updated successfully.</div>");
-                        setTimeout(function(){ window.location='vehicle-category.php';}, 2000);
+                        setTimeout(function(){ window.location='manage-accounts.php';}, 2000);
                       }else{
                         messageShow("<div class='alert alert-danger'>"+data.error+"</div>");
                         setTimeout(function(){$('.loader').hide();}, 2000);
@@ -212,20 +199,113 @@ $(document).ready(function(){
         }
     });
 
-    //delete vehicle category
+    //delete account
     $('.delete-category').on("click", function(){
         var cat_id = $(this).data('vcid');
-        if(confirm("Are you sure want to delete this vehicle category.")){
+        if(confirm("Are you sure want to delete this account.")){
             document.getElementsByClassName('card-body')[0].innerHTML += loader;
             $.ajax({
-                url: './php_files/vehicle-category.php',
+                url: './php_files/accounts.php',
                 type: 'POST',
                 data: {cat_delete:cat_id},
                 dataType: 'json',
                 success: function(data){
                     if(data.hasOwnProperty('success')){
                         messageShow("<div class='alert alert-success'>Data deleted successfully.</div>");
-                        setTimeout(function(){ window.location='vehicle-category.php';}, 2000);
+                        setTimeout(function(){ window.location='manage-accounts.php';}, 2000);
+                      }else{
+                        messageShow("<div class='alert alert-danger'>"+data.error+"</div>");
+                        setTimeout(function(){$('.loader').hide();}, 2000);
+                    }
+                }
+            });
+        }
+    });
+
+    //add vehicle category
+    $('#add-project').on("submit", function(e){
+        e.preventDefault();
+        var category_name = $('.cat_name').val();
+        var account = $('.account').val();
+        var deliveryUnit = $('.deliveryUnit').val();
+        var deliveryManager = $('.deliveryManager').val();
+        var projectManager = $('.projectManager').val();
+        var remark = $('.remark').val();
+        if(category_name == ''){
+            messageShow("<div class='alert alert-danger'>Project Name Field is Empty.</div>");
+        }else{
+            var formdata = new FormData(this);
+            formdata.append('add-project',1);
+            document.getElementsByClassName('card-body')[0].innerHTML += loader;
+            $.ajax({
+                url: './php_files/projects.php',
+                type: 'POST',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function(data){
+                    if(data.hasOwnProperty('success')){
+                        messageShow("<div class='alert alert-success'>Saved successfully.</div>");
+                        setTimeout(function(){ window.location='manage-projects.php';}, 2000);
+                      }else{
+                        messageShow("<div class='alert alert-danger'>"+data.error+"</div>");
+                        setTimeout(function(){$('.loader').hide();}, 2000);
+                    }
+                }
+            });
+        }
+    });
+
+    //update projects
+    $('#update-project').on("submit", function(e){
+        e.preventDefault();
+        var category_name = $('.cat_name').val();
+        var account = $('.account').val();
+        var deliveryUnit = $('.deliveryUnit').val();
+        var deliveryManager = $('.deliveryManager').val();
+        var projectManager = $('.projectManager').val();
+        var remark = $('.remark').val();
+        if(category_name == ''){
+            messageShow("<div class='alert alert-danger'>Project Name Field is Empty.</div>");
+        }else{
+            var formdata = new FormData(this);
+            formdata.append('update-project',1);
+            document.getElementsByClassName('card-body')[0].innerHTML += loader;
+            $.ajax({
+                url: './php_files/projects.php',
+                type: 'POST',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function(data){
+                    if(data.hasOwnProperty('success')){
+                        messageShow("<div class='alert alert-success'>Updated successfully.</div>");
+                        setTimeout(function(){ window.location='manage-projects.php';}, 2000);
+                      }else{
+                        messageShow("<div class='alert alert-danger'>"+data.error+"</div>");
+                        setTimeout(function(){$('.loader').hide();}, 2000);
+                    }
+                }
+            });
+        }
+    });
+
+    //delete project
+    $('.delete-project').on("click", function(){
+        var cat_id = $(this).data('vcid');
+        if(confirm("Are you sure want to delete this account.")){
+            document.getElementsByClassName('card-body')[0].innerHTML += loader;
+            $.ajax({
+                url: './php_files/projects.php',
+                type: 'POST',
+                data: {cat_delete:cat_id},
+                dataType: 'json',
+                success: function(data){
+                    if(data.hasOwnProperty('success')){
+                        messageShow("<div class='alert alert-success'>Data deleted successfully.</div>");
+                        setTimeout(function(){ window.location='manage-projects.php';}, 2000);
                       }else{
                         messageShow("<div class='alert alert-danger'>"+data.error+"</div>");
                         setTimeout(function(){$('.loader').hide();}, 2000);
@@ -284,8 +364,6 @@ $(document).ready(function(){
         var vehicle_id = $("#vehicle_id").val();
         if(out_time == ''){
             messageShow("<div class='alert alert-danger'>Vehicle Out Time Field is Empty.</div>");
-        }else if(parking_charge == ''){
-            messageShow("<div class='alert alert-danger'>Parking Charge Field is Empty.</div>");
         }else if(vehicle_status == ''){
             messageShow("<div class='alert alert-danger'>Vehicle Status Field is Empty.</div>");
         }else{

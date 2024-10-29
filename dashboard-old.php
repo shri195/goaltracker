@@ -9,7 +9,7 @@ include "header.php";
               <?php 
                 $db = new Database();
 
-                $db->sql("SELECT COUNT(*) AS incoming_vehicle FROM projects;");
+                $db->sql("SELECT COUNT(*) AS incoming_vehicle FROM vehicle WHERE date(vehicle_intime)=CURDATE() AND vehicle_status=0;");
                 $result = $db->getResult();
                 if(!empty($result)){
                   foreach($result as $row){
@@ -18,7 +18,7 @@ include "header.php";
                 <div class="card-body text-center">
                   <span class="icon"><i class="fas fa-taxi"></i></span>
                   <p class="card-text mb-3"><?php echo $row['incoming_vehicle']; ?></p>
-                  <h6 class="card-title text-white mb-0">Total # Projects</h6>
+                  <h5 class="card-title text-white mb-0">Total # Projects</h5>
                 </div>
               </div>
               <?php 
@@ -30,16 +30,16 @@ include "header.php";
               <?php 
                 $db = new Database();
 
-                $db->sql("SELECT COUNT(*) AS outgoing_vehicle FROM goals WHERE goalStatus=1;");
+                $db->sql("SELECT COUNT(*) AS outgoing_vehicle FROM vehicle WHERE date(vehicle_intime)=CURDATE() AND vehicle_status=1;");
                 $result = $db->getResult();
                 if(!empty($result)){
                   foreach($result as $row){
               ?>
-              <div class="card young-passion-gradient1">
+              <div class="card young-passion-gradient">
                 <div class="card-body text-center">
                   <span class="icon"><i class="fas fa-taxi"></i></span>
                   <p class="card-text mb-3"><?php echo $row['outgoing_vehicle']; ?></p>
-                  <h6 class="card-title text-white mb-0">Initiated Goal Tracker</h6>
+                  <h5 class="card-title text-white mb-0">Initiated Goal Tracker</h5>
                 </div>
               </div>
               <?php 
@@ -51,16 +51,16 @@ include "header.php";
               <?php 
                 $db = new Database();
 
-                $db->sql("SELECT COUNT(*) AS total_category FROM goals WHERE goalStatus=2");
+                $db->sql("SELECT COUNT(*) AS total_category FROM vehicle_category");
                 $result = $db->getResult();
                 if(!empty($result)){
                   foreach($result as $row){
               ?>
-              <div class="card green-gradient">
+              <div class="card purple-gradient">
                 <div class="card-body text-center">
                   <span class="icon"><i class="fas fa-file"></i></span>
                   <p class="card-text mb-3"><?php echo $row['total_category']; ?></p>
-                  <h6 class="card-title text-white mb-0">In Review Goal Tracker</h6>
+                  <h5 class="card-title text-white mb-0">In Review Goal Tracker</h5>
                 </div>
               </div>
               <?php 
@@ -72,7 +72,7 @@ include "header.php";
               <?php 
                 $db = new Database();
 
-                $db->sql("SELECT COUNT(*) AS total_incoming FROM goals WHERE goalStatus=3");
+                $db->sql("SELECT COUNT(*) AS total_incoming FROM vehicle WHERE vehicle_status=0");
                 $result = $db->getResult();
                 if(!empty($result)){
                   foreach($result as $row){
@@ -81,7 +81,7 @@ include "header.php";
                 <div class="card-body text-center">
                   <span class="icon"><i class="fas fa-taxi"></i></span>
                   <p class="card-text mb-3"><?php echo $row['total_incoming']; ?></p>
-                  <h6 class="card-title text-white mb-0">In Closure Goal Tracker</h6>
+                  <h5 class="card-title text-white mb-0">In Closure Goal Tracker</h5>
                 </div>
               </div>
               <?php 
@@ -101,18 +101,16 @@ include "header.php";
           <div class="card-body table-responsive">
             <?php 
               $db = new Database();
-              $db->select('projects','*',null,"status=1","projects.id DESC","5");
+              $db->select('vehicle','*',null,"vehicle_status=0","vehicle.id DESC","5");
               $result = $db->getResult();
             ?>
             <table class="table table-bordered">
               <thead>
                 <th>S.No</th>
-                <th>Name</th>
-                <th>Account</th>
-                <th>DU Name</th>
-                <th>DM Name</th>
-                <th>PM Name</th>
-                <th>Remark</th>
+                <th>Parking Number</th>
+                <th>Owner Name</th>
+                <th>Vehicle Reg Number</th>
+                <th>Vehicle InTime</th>
                 <th>Status</th>
                 <th>Action</th>
               </thead>
@@ -124,36 +122,22 @@ include "header.php";
                 ?>
                <tr class='tr-shadow'>
                     <td><?php echo $i; ?></td>
-                    <td><?php echo $row['name']; ?></td>
+                    <td><?php echo $row['parking_number']; ?></td>
+                    <td><?php echo $row['owner_name']; ?></td>
+                    <td><?php echo $row['reg_number']; ?></td>
                     <td>
-                    <?php
-                    $accountid = $row['account'];
-                    $db->select('accounts','name',null,"id=$accountid",null,null);
-                    $result1 = $db->getResult();
-                    if(!empty($result1)){
-                    echo $result1[0]['name'];
-                    } ?>
+                      <?php echo date('j M, Y',strtotime($row['vehicle_intime'])); ?><br>
+                      <small><?php echo date('H:i:s a',strtotime($row['vehicle_intime'])); ?></small>
                     </td>
-                    <td><?php echo $row['deliveryUnit']; ?></td>
-                    <td><?php echo $row['deliveryManager']; ?></td>
-                    <td><?php echo $row['projectManager']; ?></td>
-                    <td><?php echo $row['remark']; ?></td>
                     <td>
-                      <?php
-                        if($row['status'] == '1'){ ?>
-                          <span class="badge badge-success">
-                            Active
-                          </span>
-                      <?php }else{ ?>
-                          <span class="badge badge-danger">
-                            Inactive
-                          </span>
+                      <?php 
+                        if($row['vehicle_status'] == '0'){ ?>
+                          <span class="badge badge-info">Vehicle In</span>
                       <?php } ?>
                     </td>
                     <td>
                         <ul class="action-list">
-                          <li><a href="update-project.php?vcid=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm"><img src="images/edit.png" alt=""></a></li>
-                          <li><a href="#" data-vcid="<?php echo $row['id']; ?>" class="btn btn-danger btn-sm delete-project"><img src="images/delete.png" alt=""></a></li>
+                          <li><a href="view-vehicle.php?veid=<?php echo $row['id']; ?>" class="btn btn-primary btn-sm"><img src="images/eye.png" alt=""></a></li>
                         </ul>
                     </td>
                 </tr>

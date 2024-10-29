@@ -6,7 +6,7 @@ include "header.php" ?>
       <div class="card mb-4">
         <div class="card-header">
           <h2 class="d-inline">View Outgoing Vehicle</h2>
-          <a href="manage-outgoingvehicle.php" class="btn btn-success float-right">
+          <a href="manage-projects.php" class="btn btn-success float-right">
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
             </svg>
@@ -39,7 +39,7 @@ include "header.php" ?>
                                 if(in_array($row1['id'],$vehicle_cat)){ ?>
                                   <input type="hidden" id="charge" value="<?php echo $row1['parking_charge'] ?>">
                                   <input type="hidden" id="pcharge" value="<?php echo $row1['parking_charge'] ?>">
-                                  <?php echo $row1['category_name']; ?>
+                                  <?php echo $row1['name']; ?>
                            <?php } ?>
                          <?php } ?>
                        <?php } ?>
@@ -80,7 +80,7 @@ include "header.php" ?>
                 <tr>
                     <th>Parking Charges</th>
                     <td>
-                        <?php echo $currency_format.$row['parking_charges']; ?>
+                        <?php echo $row['parking_charges']; ?>
                     </td>
                 </tr>
                 <tr>

@@ -5,8 +5,6 @@
     if(isset($_POST['update-settings'])){
         if(!isset($_POST['site_name']) || empty($_POST['site_name'])){
             echo json_encode(array('error'=>'Site Name Field is Empty.')); exit;
-        }else if(!isset($_POST['site_currency']) || empty($_POST['site_currency'])){
-            echo json_encode(array('error'=>'Currency Field is Empty.')); exit;
         }else{
             if(!empty($_POST['old_logo']) && empty($_FILES['new_logo']['name'])){
                 $file_name = $_POST['old_logo'];
@@ -61,7 +59,6 @@
             $params = [
                 'site_name'=>$db->escapeString($_POST['site_name']),
                 'site_logo'=>$db->escapeString($file_name),
-                'currency'=>$db->escapeString($_POST['site_currency']),
             ];
 
             $db->update('settings',$params,"site_id='{$_POST['site_id']}'");

@@ -88,14 +88,13 @@ CREATE TABLE `vehicle` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vehicle_category`
+-- Table structure for table `accounts`
 --
 
-CREATE TABLE `vehicle_category` (
+CREATE TABLE `accounts` (
   `id` int(11) NOT NULL,
-  `category_name` varchar(255) NOT NULL,
-  `parking_charge` int(11) NOT NULL,
-  `category_status` int(11) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

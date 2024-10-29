@@ -21,15 +21,13 @@ ul{
     padding: 0;
     margin: 0;
 }
-.green-gradient{
-    background: rgb(116,228,135);
-    background: linear-gradient(90deg, rgba(116,228,135,1) 0%, rgba(17,162,70,1) 100%);
+.purple-gradient{
+    background: linear-gradient(40deg,#ff6ec4,#7873f5) !important;
     border: none;
     height: 100%;
 }
 .peach-gradient{
-    background: rgb(255,216,111);
-background: linear-gradient(90deg, rgba(255,216,111,1) 0%, rgba(252,98,98,1) 100%);
+    background: linear-gradient(40deg,#ffd86f,#fc6262) !important;
     border: none;
     height: 100%;
 }
@@ -39,14 +37,7 @@ background: linear-gradient(90deg, rgba(255,216,111,1) 0%, rgba(252,98,98,1) 100
     height: 100%;
 }
 .young-passion-gradient{
-    background: rgb(28,74,139);
-background: linear-gradient(90deg, rgba(28,74,139,1) 0%, rgba(106,59,188,1) 100%);
-    border: none;
-    height: 100%;
-}
-.young-passion-gradient1{
-    background: rgb(228,116,122);
-background: linear-gradient(90deg, rgba(228,116,122,1) 0%, rgba(203,81,107,1) 100%);
+    background: linear-gradient(to right,#ff8177 0,#ff867a 0,#ff8c7f 21%,#f99185 52%,#cf556c 78%,#b12a5b 100%);
     border: none;
     height: 100%;
 }
@@ -57,13 +48,11 @@ background: linear-gradient(90deg, rgba(228,116,122,1) 0%, rgba(203,81,107,1) 10
 }
 .icon i{
     color: #fff;
-    font-size: 35px;
+    font-size: 50px;
     margin-bottom: 15px;
 }
 .navbar {
-    background: #ffffff;
-    border-bottom: 1px solid #E0E0E0;
-    box-shadow: rgb(110 100 110) 0 -1px 2px;
+    background: #D85C27;
 }
 .navbar-btn {
     box-shadow: none;
@@ -88,7 +77,8 @@ background: linear-gradient(90deg, rgba(228,116,122,1) 0%, rgba(203,81,107,1) 10
     min-width: 250px;
     max-width: 250px;
     min-height: 100vh;
-    background: #FFF;
+    background: #D85C27;
+    color: #fff;
     transition: all 0.3s;
 }
 #sidebar.active {
@@ -109,20 +99,17 @@ background: linear-gradient(90deg, rgba(228,116,122,1) 0%, rgba(203,81,107,1) 10
     padding: 10px;
 }
 #sidebar ul li a {
-    color: #1d3557;
+    color: #fff;
     font-size: 15px;
     padding: 10px;
     display: block;
-}
-#sidebar ul li.active a {
-    color: #fff;
 }
 .text-color li a{
     color: #444 !important;
 }
 #sidebar ul li a:hover {
     color: #444;
-    background: #eceff3;
+    background: #fff;
 }
 #sidebar ul li.active #active:hover{
     background: #444;
@@ -159,7 +146,7 @@ a[aria-expanded="true"] {
     z-index: 2;
 }
 .card-header h2{
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 600;
     line-height: 39px;
 }
@@ -172,8 +159,8 @@ a[aria-expanded="true"] {
 }
 .card-text{
     color: #fff;
-    font-size: 28px;
-    font-weight: 500;
+    font-size: 30px;
+    font-weight: 700;
     line-height: 30px;
 }
 .view-member tbody .label{
@@ -195,9 +182,6 @@ a[aria-expanded="true"] {
 .user_name,
 .phone_number{
     display: none;
-}
-.table {
-    font-size: 0.8rem;
 }
 /* ---------------------------------------------------
     Preloader
@@ -249,14 +233,6 @@ a[aria-expanded="true"] {
     animation-iteration-count: infinite;
     animation-fill-mode: both;
     animation-delay: 0s;
-}
-.profile-pic {
-    width: 80px;
-    height: 80px;
-}
-.btn-dark {
-    background: #DF323F;
-    border: 0;
 }
 @-webkit-keyframes loading-1{
     0% {

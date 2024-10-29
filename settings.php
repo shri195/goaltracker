@@ -31,10 +31,6 @@ include "header.php" ?>
                       <img id="image" src="images/site-logo/default.jpg" alt="" width="100px"/>
                   <?php } ?>
               </div>
-              <div class="form-group">
-                  <label>Currency Format</label>
-                  <input type="text" class="form-control site_currency" placeholder="" name="site_currency" value="<?php echo $row['currency']; ?>" required>
-              </div>
               <input type="submit"  name="save" class="btn btn-dark float-right" value="Update" required>
           </form>
           <?php

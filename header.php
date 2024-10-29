@@ -15,7 +15,6 @@
     $db = new Database();
     $db->select('settings','*',null,null,null,null);
     $result = $db->getResult();
-    $currency_format = $result[0]['currency'];
   
 ?>
 <html lang="en">
@@ -52,15 +51,15 @@
                 <li <?php if(basename($_SERVER['PHP_SELF']) == "dashboard.php") echo 'class="active"'; ?>>
                     <a href="dashboard.php">Dashboard</a>
                 </li>
-                <!-- <li <?php if(basename($_SERVER['PHP_SELF']) == "vehicle-category.php") echo 'class="active"'; ?>>
-                    <a href="vehicle-category.php">Vehicle Category</a>
-                </li> -->
+                <li <?php if(basename($_SERVER['PHP_SELF']) == "manage-accounts.php") echo 'class="active"'; ?>>
+                    <a href="manage-accounts.php">Manage Accounts</a>
+                </li>
+                <li <?php if(basename($_SERVER['PHP_SELF']) == "manage-projects.php") echo 'class="active"'; ?>>
+                    <a href="manage-projects.php">Manage Projects</a>
+                </li>
                 <li <?php if(basename($_SERVER['PHP_SELF']) == "vehicle.php") echo 'class="active"'; ?>>
                     <a href="vehicle.php">Manage Goal Tracker</a>
                 </li>
-                <!-- <li <?php if(basename($_SERVER['PHP_SELF']) == "manage-outgoingvehicle.php") echo 'class="active"'; ?>>
-                    <a href="manage-outgoingvehicle.php">Manage Out Vehicle</a>
-                </li> -->
                 <li <?php if(basename($_SERVER['PHP_SELF']) == "reports.php") echo 'class="active"'; ?>>
                     <a href="reports.php">Reports</a>
                 </li>

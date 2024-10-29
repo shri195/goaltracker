@@ -39,7 +39,7 @@ include "header.php" ?>
                                 if(in_array($row1['id'],$vehicle_cat)){ ?>
                                   <input type="hidden" id="charge" value="<?php echo $row1['parking_charge'] ?>">
                                   <input type="hidden" id="pcharge" value="<?php echo $row1['parking_charge'] ?>">
-                                  <?php echo $row1['category_name']; ?>
+                                  <?php echo $row1['name']; ?>
                            <?php } ?>
                          <?php } ?>
                        <?php } ?>
@@ -83,7 +83,6 @@ include "header.php" ?>
                 <tr>
                     <th>Parking Charges</th>
                     <td>
-                      <input type="hidden" id="currency_format" value="<?php echo $currency_format; ?>">
                       <div id="parking_charge"></div>
                     </td>
                 </tr>
@@ -121,7 +120,6 @@ include "header.php" ?>
                         <label><b>In Time :</b></label>
                         <input type="hidden" id="vehicle_id" value="<?php echo $row['id']; ?>">
                         <input type="hidden" id="in-time" value="<?php echo $row['vehicle_intime']; ?>">
-                        <input type="hidden" id="currency-format" value="<?php echo $currency_format; ?>">
                         <?php
                           $in_time = $row['vehicle_intime']; 
                           // $in_time = substr($in_time, 0, strpos($in_time, '('));
@@ -203,7 +201,6 @@ include "header.php" ?>
     setInterval(displayclick, 500);
 
     var parking_charges = document.getElementById('charge').value;
-    var currency_format = document.getElementById('currency_format').value;
     var dateOne = document.getElementById('in_time').value;
     dateOne = dateOne.replace(/-/g, "/");
     const dateOneObj = new Date(dateOne);
@@ -213,7 +210,7 @@ include "header.php" ?>
     var hours = Math.abs(Math.ceil(diff));
     console.log(diff);
     var charge = parseInt(hours) * parking_charges;
-    document.getElementById('parking_charge').innerHTML = currency_format+charge;
+    document.getElementById('parking_charge').innerHTML = charge;
     
 
 </script>

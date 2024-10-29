@@ -59,7 +59,6 @@ include "header.php" ?>
                         <th>Vehicle Reg Number</th>
                         <th>Vehicle DateTime</th>
                         <th>Status</th>
-                        <th>Parking Charge(<?php echo $currency_format; ?>)</th>
                     </tr>
                 </thead>
                 <tbody>

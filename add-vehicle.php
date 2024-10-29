@@ -29,8 +29,8 @@ include "header.php" ?>
                   <?php 
                     if(count($result) > 0){
                       foreach($result as $row){
-                        if($row['category_status'] == '1'){
-                          echo "<option value='{$row['id']}'>{$row['category_name']}</option>";
+                        if($row['status'] == '1'){
+                          echo "<option value='{$row['id']}'>{$row['name']}</option>";
                         }
                       }
                     }

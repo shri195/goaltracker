@@ -44,8 +44,6 @@
     if(isset($_POST['updateVehicle'])){
         if(!isset($_POST['out_time']) || empty($_POST['out_time'])){
             echo json_encode(array('error'=>'Vehicle Out Time Field is Empty.')); exit;
-        }else if(!isset($_POST['parking_charge']) || empty($_POST['parking_charge'])){
-            echo json_encode(array('error'=>'Parking Charge Field is Empty.')); exit;
         }else if(!isset($_POST['vehicle_status']) || empty($_POST['vehicle_status'])){
             echo json_encode(array('error'=>'Vehicle Status Field is Empty.')); exit;
         }else{
