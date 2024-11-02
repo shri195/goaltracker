@@ -137,7 +137,7 @@ $(document).ready(function(){
         }
     });
 
-    //add vehicle category
+    //add account
     $('#add-account').on("submit", function(e){
         e.preventDefault();
         var category_name = $('.cat_name').val();
@@ -167,12 +167,10 @@ $(document).ready(function(){
         }
     });
 
-    //update vehicle category
+    //update account
     $('#update-account').on("submit", function(e){
         e.preventDefault();
         var category_name = $('.cat_name').val();
-        var parking_charge = $('.parking_charge').val();
-        var category_status = $('.cat_status').val();
         if(category_name == ''){
             messageShow("<div class='alert alert-danger'>Account Name Field is Empty.</div>");
         }else{
@@ -222,15 +220,10 @@ $(document).ready(function(){
         }
     });
 
-    //add vehicle category
+    //add project
     $('#add-project').on("submit", function(e){
         e.preventDefault();
         var category_name = $('.cat_name').val();
-        var account = $('.account').val();
-        var deliveryUnit = $('.deliveryUnit').val();
-        var deliveryManager = $('.deliveryManager').val();
-        var projectManager = $('.projectManager').val();
-        var remark = $('.remark').val();
         if(category_name == ''){
             messageShow("<div class='alert alert-danger'>Project Name Field is Empty.</div>");
         }else{
@@ -261,11 +254,6 @@ $(document).ready(function(){
     $('#update-project').on("submit", function(e){
         e.preventDefault();
         var category_name = $('.cat_name').val();
-        var account = $('.account').val();
-        var deliveryUnit = $('.deliveryUnit').val();
-        var deliveryManager = $('.deliveryManager').val();
-        var projectManager = $('.projectManager').val();
-        var remark = $('.remark').val();
         if(category_name == ''){
             messageShow("<div class='alert alert-danger'>Project Name Field is Empty.</div>");
         }else{
@@ -315,37 +303,29 @@ $(document).ready(function(){
         }
     });
 
-    //add vehicle
-    $("#add-vehicle").on("submit", function(e){
+    //add goal
+    $("#add-goal").on("submit", function(e){
         e.preventDefault();
-        var vehicle_cat = $('.vehicle_cat').val();
-        var vehicle_company = $('.vehicle_company').val();
-        var reg_no = $('.reg_no').val();
-        var owner_name = $('.owner_name').val();
-        var owner_contact = $('.owner_contact').val();
-        var vehicle_intime = $('.in_time').val();
-        if(vehicle_cat == ''){
-            messageShow("<div class='alert alert-danger'>Vehicle Category Name Field is Empty.</div>");
-        }else if(vehicle_company == ''){
-            messageShow("<div class='alert alert-danger'>Vehicle Company Name Field is Empty.</div>");
-        }else if(reg_no == ''){
-            messageShow("<div class='alert alert-danger'>Registration Number Field is Empty.</div>");
-        }else if(owner_name == ''){
-            messageShow("<div class='alert alert-danger'>Owner Name Field is Empty.</div>");
-        }else if(owner_contact == ''){
-            messageShow("<div class='alert alert-danger'>Owner Contact Field is Empty.</div>");
+        var name = $('.name').val();
+        if(name == ''){
+            messageShow("<div class='alert alert-danger'>Goal Name Field is Empty.</div>");
         }else{
+            var formdata = new FormData(this);
+            formdata.append('add-goal',1);
+            console.log(formdata);
             document.getElementsByClassName('card-body')[0].innerHTML += loader;
             $.ajax({
-                url: './php_files/vehicle.php',
+                url: './php_files/goals.php',
                 type: 'POST',
-                data: {addvehicle:1,vehicle_cat:vehicle_cat,vehicle_company:vehicle_company,reg_no:reg_no,owner_name:owner_name,owner_contact:owner_contact,vehicle_intime:vehicle_intime},
-                
+                data: formdata,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
                 success: function(data){
                     console.log(data);
-                    if(data.hasOwnProperty('1')){
+                    if(data.hasOwnProperty('success')){
                         messageShow("<div class='alert alert-success'>Saved successfully.</div>");
-                        setTimeout(function(){ window.location='vehicle.php';}, 2000);
+                        setTimeout(function(){ window.location='manage-goal.php';}, 2000);
                       }else{
                         messageShow("<div class='alert alert-danger'>"+data.error+"</div>");
                         setTimeout(function(){$('.loader').hide();}, 2000);
@@ -355,28 +335,27 @@ $(document).ready(function(){
         }
     });
 
-    //update vehicle
-    $("#update-vehicle").on("submit", function(e){
+    //update goal
+    $("#update-goal").on("submit", function(e){
         e.preventDefault();
-        var out_time = $("#clock1").text();
-        var parking_charge = $("#p-charge").text();
-        var vehicle_status = $(".vehicle_status").val();
-        var vehicle_id = $("#vehicle_id").val();
-        if(out_time == ''){
-            messageShow("<div class='alert alert-danger'>Vehicle Out Time Field is Empty.</div>");
-        }else if(vehicle_status == ''){
-            messageShow("<div class='alert alert-danger'>Vehicle Status Field is Empty.</div>");
+        var name = $('.name').val();
+        if(name == ''){
+            messageShow("<div class='alert alert-danger'>Goal Name Field is Empty.</div>");
         }else{
-            document.getElementsByClassName('modal-body')[0].innerHTML += loader;
+            var formdata = new FormData(this);
+            formdata.append('update-goal',1);
+            document.getElementsByClassName('card-body')[0].innerHTML += loader;
             $.ajax({
-                url: './php_files/vehicle.php',
+                url: './php_files/goals.php',
                 type: 'POST',
-                data: {updateVehicle:1,out_time:out_time,parking_charge:parking_charge,vehicle_status:vehicle_status,vehicle_id:vehicle_id},
+                data: formdata,
+                processData: false,
+                contentType: false,
                 dataType: 'json',
                 success: function(data){
                     if(data.hasOwnProperty('success')){
                         messageShow("<div class='alert alert-success'>Updated successfully.</div>");
-                        setTimeout(function(){ window.location='vehicle.php';}, 2000);
+                        setTimeout(function(){ window.location='manage-goal.php';}, 2000);
                       }else{
                         messageShow("<div class='alert alert-danger'>"+data.error+"</div>");
                         setTimeout(function(){$('.loader').hide();}, 2000);
@@ -386,27 +365,28 @@ $(document).ready(function(){
         }
     });
 
-    $('select[name=search_type]').change(function(){
-        var val = $(this).val();
-        if(val == 'all'){
-            $('.vehicle_number').css('display','none');
-            $('.user_name').css('display','none');
-            $('.phone_number').css('display','none');
-        }else if(val == 'vehicle_number'){
-            $('.vehicle_number').css('display','block');
-            $('.user_name').css('display','none');
-            $('.phone_number').css('display','none');
-        }else if(val == 'user_name'){
-            $('.vehicle_number').css('display','none');
-            $('.user_name').css('display','block');
-            $('.phone_number').css('display','none');
-        }else if(val == 'phone_number'){
-            $('.vehicle_number').css('display','none');
-            $('.user_name').css('display','none');
-            $('.phone_number').css('display','block');
+    //delete goal
+    $('.delete-goal').on("click", function(){
+        var cat_id = $(this).data('vcid');
+        if(confirm("Are you sure want to delete this goal.")){
+            document.getElementsByClassName('card-body')[0].innerHTML += loader;
+            $.ajax({
+                url: './php_files/goals.php',
+                type: 'POST',
+                data: {cat_delete:cat_id},
+                dataType: 'json',
+                success: function(data){
+                    if(data.hasOwnProperty('success')){
+                        messageShow("<div class='alert alert-success'>Data deleted successfully.</div>");
+                        setTimeout(function(){ window.location='manage-goal.php';}, 2000);
+                      }else{
+                        messageShow("<div class='alert alert-danger'>"+data.error+"</div>");
+                        setTimeout(function(){$('.loader').hide();}, 2000);
+                    }
+                }
+            });
         }
     });
-
 
     var colltable = $('#reportData').DataTable({
         processing: true, //Feature control the processing indicator.
@@ -419,57 +399,25 @@ $(document).ready(function(){
                 var from_date = $('input[name=from_date]').val();
                 var to_date = $('input[name=to_date]').val();
                 var type = $('select[name=search_type] option:selected').val();
-                var vehicle_number = $('input[name=vehicle_number]').val();
-                var user_name = $('input[name=user_name]').val();
-                var phone_number = $('input[name=phone_number]').val();
                 // Append to data
                 data.from_date = from_date;
                 data.to_date = to_date;
                 data.type = type;
-                data.vehicle_number = vehicle_number;
-                data.user_name = user_name;
-                data.phone_number = phone_number;
             },
         },
         columns: [
-          { data: "p_number" },
-          { data: "owner" },
-          { data: "vehicle_no" },
-          { data: "dateTime" },
-          { data: "status" },
-          { data: "parking_charges" },
+          { data: "project" },
+          { data: "sprintReleaseName" },
+          { data: "createdAt" },
+          { data: "dmName" },
+          { data: "goalStatus" }
         ],
         dom: 'Bfrtip',
           buttons: [
-            { extend: 'print', footer: true },
-            { extend: 'excelHtml5', footer: true },
-            { extend: 'pdfHtml5', footer: true }
-        ],
-        footerCallback: function ( row, data, start, end, display ){
-            var api = this.api(), data;
-            var numFormat = $.fn.dataTable.render.number( ",", ".", 0, "" ).display;
-            // Remove the formatting to get integer data for summation
-            var intVal = function ( i )
-            {
-                return typeof i === "string" ?
-                    i.replace(/[\$,]/g, "")*1 :
-                    typeof i === "number" ?
-                        i : 0;
-            };
-            // Total Column 4 over all pages
-            total = api
-                .column( 5 )
-                .data()
-                .reduce( function (a, b)
-                {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            // Update footer
-            $( api.column( 5 ).footer() ).html
-            (
-                numFormat(total)
-            );
-        }
+            { extend: 'csvHtml5', footer: true },
+            { extend: 'pdfHtml5', footer: true },
+            { extend: 'print', footer: true }
+        ]
     });
 
     $("#search-form").on("submit", function(e){

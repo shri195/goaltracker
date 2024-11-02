@@ -9,7 +9,7 @@ include "header.php";
               <?php 
                 $db = new Database();
 
-                $db->sql("SELECT COUNT(*) AS incoming_vehicle FROM projects;");
+                $db->sql("SELECT COUNT(*) AS tot_project FROM projects;");
                 $result = $db->getResult();
                 if(!empty($result)){
                   foreach($result as $row){
@@ -17,7 +17,7 @@ include "header.php";
               <div class="card young-passion-gradient">
                 <div class="card-body text-center">
                   <span class="icon"><i class="fas fa-taxi"></i></span>
-                  <p class="card-text mb-3"><?php echo $row['incoming_vehicle']; ?></p>
+                  <p class="card-text mb-3"><?php echo $row['tot_project']; ?></p>
                   <h6 class="card-title text-white mb-0">Total # Projects</h6>
                 </div>
               </div>
@@ -30,7 +30,7 @@ include "header.php";
               <?php 
                 $db = new Database();
 
-                $db->sql("SELECT COUNT(*) AS outgoing_vehicle FROM goals WHERE goalStatus=1;");
+                $db->sql("SELECT COUNT(*) AS ini_goal FROM goals WHERE goalStatus=1;");
                 $result = $db->getResult();
                 if(!empty($result)){
                   foreach($result as $row){
@@ -38,7 +38,7 @@ include "header.php";
               <div class="card young-passion-gradient1">
                 <div class="card-body text-center">
                   <span class="icon"><i class="fas fa-taxi"></i></span>
-                  <p class="card-text mb-3"><?php echo $row['outgoing_vehicle']; ?></p>
+                  <p class="card-text mb-3"><?php echo $row['ini_goal']; ?></p>
                   <h6 class="card-title text-white mb-0">Initiated Goal Tracker</h6>
                 </div>
               </div>
@@ -51,7 +51,7 @@ include "header.php";
               <?php 
                 $db = new Database();
 
-                $db->sql("SELECT COUNT(*) AS total_category FROM goals WHERE goalStatus=2");
+                $db->sql("SELECT COUNT(*) AS review_goal FROM goals WHERE goalStatus=3");
                 $result = $db->getResult();
                 if(!empty($result)){
                   foreach($result as $row){
@@ -59,7 +59,7 @@ include "header.php";
               <div class="card green-gradient">
                 <div class="card-body text-center">
                   <span class="icon"><i class="fas fa-file"></i></span>
-                  <p class="card-text mb-3"><?php echo $row['total_category']; ?></p>
+                  <p class="card-text mb-3"><?php echo $row['review_goal']; ?></p>
                   <h6 class="card-title text-white mb-0">In Review Goal Tracker</h6>
                 </div>
               </div>
@@ -72,7 +72,7 @@ include "header.php";
               <?php 
                 $db = new Database();
 
-                $db->sql("SELECT COUNT(*) AS total_incoming FROM goals WHERE goalStatus=3");
+                $db->sql("SELECT COUNT(*) AS closure_goal FROM goals WHERE goalStatus=4");
                 $result = $db->getResult();
                 if(!empty($result)){
                   foreach($result as $row){
@@ -80,7 +80,7 @@ include "header.php";
               <div class="card peach-gradient">
                 <div class="card-body text-center">
                   <span class="icon"><i class="fas fa-taxi"></i></span>
-                  <p class="card-text mb-3"><?php echo $row['total_incoming']; ?></p>
+                  <p class="card-text mb-3"><?php echo $row['closure_goal']; ?></p>
                   <h6 class="card-title text-white mb-0">In Closure Goal Tracker</h6>
                 </div>
               </div>
@@ -92,6 +92,7 @@ include "header.php";
 
         </div>
     </div>
+    <?php if($_SESSION['admin_id'] != 3) { ?>
     <div class="row">
       <div class="col-md-12">
         <div class="card mt-4">
@@ -170,6 +171,7 @@ include "header.php";
         </div>
       </div>
     </div>
+    <?php } ?>
   </div>
 </div>
 <?php include "footer.php" ?>

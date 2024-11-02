@@ -1,7 +1,7 @@
 <?php 
     include "config.php";
     if(!session_id()){ session_start();}
-    //add vehicle category
+    //add project
     if(isset($_POST['add-project'])){
         if(!isset($_POST['cat_name']) || empty($_POST['cat_name'])){
             echo json_encode(array('error'=>'Project Name Field is Empty.')); exit;
@@ -36,7 +36,7 @@
         }
     }
 
-    //update vehicle category
+    //update project
     if(isset($_POST['update-project'])){
         if(!isset($_POST['cat_name']) || empty($_POST['cat_name'])){
             echo json_encode(array('error'=>'Project Name Field is Empty.')); exit;

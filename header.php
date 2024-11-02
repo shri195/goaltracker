@@ -51,21 +51,27 @@
                 <li <?php if(basename($_SERVER['PHP_SELF']) == "dashboard.php") echo 'class="active"'; ?>>
                     <a href="dashboard.php">Dashboard</a>
                 </li>
+                <?php if($_SESSION['admin_id'] != 3) { ?>
                 <li <?php if(basename($_SERVER['PHP_SELF']) == "manage-accounts.php") echo 'class="active"'; ?>>
                     <a href="manage-accounts.php">Manage Accounts</a>
                 </li>
                 <li <?php if(basename($_SERVER['PHP_SELF']) == "manage-projects.php") echo 'class="active"'; ?>>
                     <a href="manage-projects.php">Manage Projects</a>
                 </li>
-                <li <?php if(basename($_SERVER['PHP_SELF']) == "vehicle.php") echo 'class="active"'; ?>>
-                    <a href="vehicle.php">Manage Goal Tracker</a>
+                <?php } ?>
+                <li <?php if(basename($_SERVER['PHP_SELF']) == "manage-goal.php") echo 'class="active"'; ?>>
+                    <a href="manage-goal.php">Manage Goal Tracker</a>
                 </li>
+                <?php if($_SESSION['admin_id'] != 3) { ?>
                 <li <?php if(basename($_SERVER['PHP_SELF']) == "reports.php") echo 'class="active"'; ?>>
                     <a href="reports.php">Reports</a>
                 </li>
+                <?php } ?>
+                <?php if($_SESSION['admin_id'] == 1) { ?>
                 <li <?php if(basename($_SERVER['PHP_SELF']) == "settings.php") echo 'class="active"'; ?>>
                     <a href="settings.php">Settings</a>
                 </li>
+                <?php } ?>
             </ul>
         </nav>
         <div class="container-fluid p-0">
@@ -86,7 +92,9 @@
                                 Hi, <?php echo $_SESSION['admin_fullname']; ?>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <?php if($_SESSION['admin_id'] == 1) { ?>
                               <a class="dropdown-item" href="profile.php">My Profile</a>
+                              <?php } ?>
                               <a class="dropdown-item logout" href="#">Log Out</a>
                             </div>
                         </div>

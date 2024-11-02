@@ -1,7 +1,7 @@
 <?php 
     include "config.php";
     if(!session_id()){ session_start();}
-    //add vehicle category
+    //add account
     if(isset($_POST['add-account'])){
         if(!isset($_POST['cat_name']) || empty($_POST['cat_name'])){
             echo json_encode(array('error'=>'Account Name Field is Empty.')); exit;
@@ -31,7 +31,7 @@
         }
     }
 
-    //update vehicle category
+    //update account
     if(isset($_POST['update-account'])){
         if(!isset($_POST['cat_name']) || empty($_POST['cat_name'])){
             echo json_encode(array('error'=>'Account Name Field is Empty.')); exit;
@@ -62,7 +62,7 @@
         }
     }
 
-    //delete vehicle category
+    //delete account
     if(isset($_POST['cat_delete'])){
         $db = new Database();
 

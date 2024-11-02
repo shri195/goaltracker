@@ -26,7 +26,7 @@ $(document).ready(function() {
       $('.table-data').DataTable({
       dom: 'Bfrtip',
       buttons: [
-          'excel', 'pdf', 'print'
+          'csvHtml5', 'pdf', 'print'
       ]
     });
 

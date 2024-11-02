@@ -4,7 +4,7 @@ ob_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Vehicle Parking Management</title>
+	<title>Goal Tracker Management</title>
 	<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css">
 	<style>
 		body{
@@ -91,12 +91,12 @@ ob_start();
 		<div class="container">
 			<div class="row">
 				<div class="offset-3 col-6">
-					<h1 class="text-center">Vehicle Parking Management</h1>
+					<h1 class="text-center">Goal Tracker Management</h1>
 					<div class="tab" role="tabpanel">
 						<form class="tab-content tabs" action="<?php  echo $_SERVER['PHP_SELF']; ?>" method="POST">
 							<div role="tabpanel" class="tab-pane active" id="Section1">
-								<h3>Welcome to Vehicle Parking Management</h3>
-								<p>Introducing Vehicle Parking Management - a complete management solution to manage your Vehicle Category, Add Vehicle, Manage Incoming and Outgoing Vehicle, Settings, Reports & etc.</p>
+								<h3>Welcome to Goal Tracker Management</h3>
+								<p>Introducing Goal Tracker Management - a complete management solution to manage your accounts, Manage Projects, Manage Goals, Settings, Reports & etc.</p>
 								<ul class="nav justify-content-center">
 									<li class="nav-item">
 										<a href="#Section2" class="nav-link btn btn-success mx-2" data-toggle="tab" role="tab">Next</a>
