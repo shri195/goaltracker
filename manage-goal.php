@@ -11,8 +11,12 @@ include "header.php" ?>
         <div class="card-body position-relative">
           <div id="table-data">
             <?php 
+              $where = "";
+              if(isset($_GET['pid'])) {
+                $where = "goals.project = ".$_GET['pid'];
+              }
               $db = new Database();
-              $db->select('goals','*',null,null,'goals.id DESC',null);
+              $db->select('goals','*',null,$where,'goals.id DESC',null);
               $result = $db->getResult();
             ?>
             <table class="table-data table table-bordered">
@@ -33,7 +37,7 @@ include "header.php" ?>
                   if(count($result) > 0){
                     $i = 0;
                     foreach($result as $row){
-                    if($row['isLatest'] == '1'){
+                    if(isset($row['id']) && $row['isLatest'] == '1'){
                       $i++;
                 ?>
                 <tr>

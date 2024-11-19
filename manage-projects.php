@@ -38,7 +38,7 @@ include "header.php" ?>
                 ?>
                 <tr>
                     <td><?php echo $i; ?></td>
-                    <td><?php echo $row['name']; ?></td>
+                    <td><a href="manage-goal.php?pid=<?php echo $row['id']; ?>"><?php echo $row['name']; ?></a></td>
                     <td>
                     <?php
                     $accountid = $row['account'];
