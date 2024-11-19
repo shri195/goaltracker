@@ -33,7 +33,7 @@ include "header.php" ?>
                 ?>
                 <tr>
                     <td><?php echo $i; ?></td>
-                    <td><?php echo $row['name']; ?></td>
+                    <td><a href="manage-projects.php?aid=<?php echo $row['id']; ?>"><?php echo $row['name']; ?></a></td>
                     <td>
                       <?php
                         if($row['status'] == '1'){ ?>

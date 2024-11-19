@@ -11,8 +11,12 @@ include "header.php" ?>
         <div class="card-body position-relative">
           <div id="table-data">
             <?php 
+              $where = "";
+              if(isset($_GET['aid'])) {
+                $where = "projects.account = ".$_GET['aid'];
+              }
               $db = new Database();
-              $db->select('projects','*',null,null,'projects.id DESC',null);
+              $db->select('projects','*',null,$where,'projects.id DESC',null);
               $result = $db->getResult();
             ?>
             <table class="table-data table table-bordered">
