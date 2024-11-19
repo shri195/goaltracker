@@ -16,7 +16,7 @@ include "header.php";
               ?>
               <div class="card young-passion-gradient">
                 <div class="card-body text-center">
-                  <span class="icon"><i class="fas fa-taxi"></i></span>
+                  <span class="icon"><i class="fas fa-align-justify"></i></span>
                   <p class="card-text mb-3"><?php echo $row['tot_project']; ?></p>
                   <h6 class="card-title text-white mb-0">Total # Projects</h6>
                 </div>
@@ -37,7 +37,7 @@ include "header.php";
               ?>
               <div class="card young-passion-gradient1">
                 <div class="card-body text-center">
-                  <span class="icon"><i class="fas fa-taxi"></i></span>
+                  <span class="icon"><i class="fas fa-bell"></i></span>
                   <p class="card-text mb-3"><?php echo $row['ini_goal']; ?></p>
                   <h6 class="card-title text-white mb-0">Initiated Goal Tracker</h6>
                 </div>
@@ -58,7 +58,7 @@ include "header.php";
               ?>
               <div class="card green-gradient">
                 <div class="card-body text-center">
-                  <span class="icon"><i class="fas fa-file"></i></span>
+                  <span class="icon"><i class="fas fa-lightbulb"></i></span>
                   <p class="card-text mb-3"><?php echo $row['review_goal']; ?></p>
                   <h6 class="card-title text-white mb-0">In Review Goal Tracker</h6>
                 </div>
@@ -79,7 +79,7 @@ include "header.php";
               ?>
               <div class="card peach-gradient">
                 <div class="card-body text-center">
-                  <span class="icon"><i class="fas fa-taxi"></i></span>
+                  <span class="icon"><i class="fas fa-calendar-check"></i></span>
                   <p class="card-text mb-3"><?php echo $row['closure_goal']; ?></p>
                   <h6 class="card-title text-white mb-0">In Closure Goal Tracker</h6>
                 </div>
