@@ -1,5 +1,6 @@
 <?php 
     include "config.php";
+    if(!session_id()){ session_start();}
     $db = new Database();
     if(isset($_POST['type']) && $_POST['type'] != ''){
         $search_type = $_POST['type'];
@@ -10,7 +11,11 @@
             $where .= '';
         }
 
-        $db->select('goals','*',null,$where,null,null);
+        $join = "";
+        if(isset($_SESSION['role']) &&  $_SESSION['role'] =="DM"){
+        $join = " projects ON goals.project = projects.id AND projects.deliveryManager = ".$_SESSION['admin_id'];
+        }
+        $db->select('goals','*',$join,$where,null,null);
         $result = $db->getResult();
         $output = [];
         foreach($result as $row){
