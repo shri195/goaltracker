@@ -15,6 +15,8 @@
     $db = new Database();
     $db->select('settings','*',null,null,null,null);
     $result = $db->getResult();
+
+    $adminArray =  array('admin', 'DM');
   
 ?>
 <html lang="en">
@@ -51,23 +53,39 @@
                 <li <?php if(basename($_SERVER['PHP_SELF']) == "dashboard.php") echo 'class="active"'; ?>>
                     <a href="dashboard.php">Dashboard</a>
                 </li>
-                <?php if($_SESSION['admin_id'] != 3) { ?>
-                <li <?php if(basename($_SERVER['PHP_SELF']) == "manage-accounts.php") echo 'class="active"'; ?>>
-                    <a href="manage-accounts.php">Manage Accounts</a>
-                </li>
+             
+
+                <?php if($_SESSION['role'] == 'admin') { ?>
+                    <li <?php if(basename($_SERVER['PHP_SELF']) == "manage-roles.php") echo 'class="active"'; ?>>
+                        <a href="manage-roles.php">Manage Roles</a>
+                    </li>          
+
+                    <li <?php if(basename($_SERVER['PHP_SELF']) == "manage-users.php") echo 'class="active"'; ?>>
+                        <a href="manage-users.php">Manage users</a>
+                    </li>
+
+                    <li <?php if(basename($_SERVER['PHP_SELF']) == "manage-accounts.php") echo 'class="active"'; ?>>
+                        <a href="manage-accounts.php">Manage Accounts</a>
+                    </li>
+
+                <?php } ?>
+
+                <?php if(in_array($_SESSION['role'], $adminArray)) { ?>               
                 <li <?php if(basename($_SERVER['PHP_SELF']) == "manage-projects.php") echo 'class="active"'; ?>>
                     <a href="manage-projects.php">Manage Projects</a>
                 </li>
                 <?php } ?>
+               
+
                 <li <?php if(basename($_SERVER['PHP_SELF']) == "manage-goal.php") echo 'class="active"'; ?>>
                     <a href="manage-goal.php">Manage Goal Tracker</a>
                 </li>
-                <?php if($_SESSION['admin_id'] != 3) { ?>
+                <?php if(in_array($_SESSION['role'], $adminArray)) { ?>
                 <li <?php if(basename($_SERVER['PHP_SELF']) == "reports.php") echo 'class="active"'; ?>>
                     <a href="reports.php">Reports</a>
                 </li>
                 <?php } ?>
-                <?php if($_SESSION['admin_id'] == 1) { ?>
+                <?php if($_SESSION['role'] == 'admin') { ?>
                 <li <?php if(basename($_SERVER['PHP_SELF']) == "settings.php") echo 'class="active"'; ?>>
                     <a href="settings.php">Settings</a>
                 </li>
@@ -92,7 +110,7 @@
                                 Hi, <?php echo $_SESSION['admin_fullname']; ?>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <?php if($_SESSION['admin_id'] == 1) { ?>
+                              <?php if($_SESSION['role'] == 'admin') { ?>
                               <a class="dropdown-item" href="profile.php">My Profile</a>
                               <?php } ?>
                               <a class="dropdown-item logout" href="#">Log Out</a>

@@ -11,16 +11,20 @@
 
             $db = new Database();
             $username = $db->escapeString($_POST['name']);
-            $password = md5($db->escapeString($_POST['pass']));
+            //$password = md5($db->escapeString($_POST['pass']));
+            $password =$_POST['pass'];
+            $db->select('users','users.id, users.firstName, users.lastName, roles.shortName as shortName, roles.id as roleId',"roles ON users.role = roles.id","username = '$username' AND password = '$password'",null,0);
 
-            $db->select('admin','admin_fullname, admin_id',null,"admin_username = '$username' AND admin_password = '$password'",null,0);
             $result = $db->getResult();
             if(!empty($result)){
                 /* start session */
                 session_start();
                 /* set session variable */
-                $_SESSION['admin_fullname'] = $result[0]['admin_fullname'];
-                $_SESSION['admin_id'] = $result[0]['admin_id'];
+                $_SESSION['admin_fullname'] = $result[0]['firstName']. ' ' . $result[0]['lastName'];
+                $_SESSION['admin_id'] = $result[0]['id'];
+                $_SESSION['role'] = $result[0]['shortName'];
+                $_SESSION['roleId'] = $result[0]['roleId'];
+                $_SESSION['loggedInUsersId'] = $result[0]['id'];
                 echo json_encode(array('success'=>'true')); exit;
             }else{
                 echo json_encode(array('error'=>'false')); exit;
@@ -39,12 +43,4 @@
 
         echo '1'; exit;
     }
-
-
-
-
-
-
-
-
 ?>

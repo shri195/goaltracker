@@ -91,7 +91,6 @@
 
     //Function to select from the Database
     public function select($table, $rows = "*", $join = null, $where = null, $order = null, $limit = null){
-//print_r($this->tableExist($table)); exit;
       if($this->tableExist($table)){
 
         $sql = "SELECT $rows FROM $table";
@@ -113,7 +112,7 @@
           $start = ($page - 1) * $limit;
           $sql .= " LIMIT $start,$limit";
         }
-      //  echo $sql; exit;
+        //echo $sql;
 
         $query = $this->mysqli->query($sql);
 

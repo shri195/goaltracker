@@ -15,9 +15,12 @@ include "header.php" ?>
               if(isset($_GET['aid'])) {
                 $where = "projects.account = ".$_GET['aid'];
               }
-              $db = new Database();
-              $db->select('projects','*',null,$where,'projects.id DESC',null);
-              $result = $db->getResult();
+              if(isset($_SESSION['role']) &&  $_SESSION['role'] =="DM"){
+                $where .= "projects.deliveryManager = ".$_SESSION['admin_id'];
+              }
+             $db = new Database();
+             $db->select('projects','projects.id as id, projects.name, projects.account, projects.deliveryUnit, projects.remark,  projects.status, delivery_manager.firstName as DMFirst, project_manager.firstName as PMFirst, delivery_manager.lastName as DMLast, project_manager.lastName as PMLast',"users AS delivery_manager ON projects.deliveryManager = delivery_manager.id JOIN users AS project_manager ON projects.projectManager = project_manager.id",$where,'projects.id DESC',null);
+             $result = $db->getResult();
             ?>
             <table class="table-data table table-bordered">
               <thead class="thead-light">
@@ -53,8 +56,8 @@ include "header.php" ?>
                     } ?>
                     </td>
                     <td><?php echo $row['deliveryUnit']; ?></td>
-                    <td><?php echo $row['deliveryManager']; ?></td>
-                    <td><?php echo $row['projectManager']; ?></td>
+                    <td><?php echo $row['DMFirst'], ' '.$row['DMLast']; ?></td>
+                    <td><?php echo $row['PMFirst'], ' '.$row['PMLast']; ?></td>
                     <td><?php echo $row['remark']; ?></td>
                     <td>
                       <?php

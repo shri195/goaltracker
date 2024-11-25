@@ -220,6 +220,185 @@ $(document).ready(function(){
         }
     });
 
+
+    //add account
+    $('#add-role').on("submit", function(e){
+        e.preventDefault();
+        var role_name = $('.role_name').val();
+        if(role_name == ''){
+            messageShow("<div class='alert alert-danger'>Account Name Field is Empty.</div>");
+        }else{
+            var formdata = new FormData(this);
+            formdata.append('add-role',1);
+            document.getElementsByClassName('card-body')[0].innerHTML += loader;
+            $.ajax({
+                url: './php_files/roles.php',
+                type: 'POST',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function(data){
+                    if(data.hasOwnProperty('success')){
+                        messageShow("<div class='alert alert-success'>Saved successfully.</div>");
+                        setTimeout(function(){ window.location='manage-roles.php';}, 2000);
+                      }else{
+                        messageShow("<div class='alert alert-danger'>"+data.error+"</div>");
+                        setTimeout(function(){$('.loader').hide();}, 2000);
+                    }
+                }
+            });
+        }
+    });
+
+    //update role
+    $('#update-role').on("submit", function(e){
+        e.preventDefault();
+        var role_name = $('.role_name').val();
+        if(role_name == ''){
+            messageShow("<div class='alert alert-danger'>Account Name Field is Empty.</div>");
+        }else{
+            var formdata = new FormData(this);
+            formdata.append('update-role',1);
+            document.getElementsByClassName('card-body')[0].innerHTML += loader;
+            $.ajax({
+                url: './php_files/roles.php',
+                type: 'POST',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function(data){
+                    if(data.hasOwnProperty('success')){
+                        messageShow("<div class='alert alert-success'>Updated successfully.</div>");
+                        setTimeout(function(){ window.location='manage-roles.php';}, 2000);
+                    }else{
+                        messageShow("<div class='alert alert-danger'>"+data.error+"</div>");
+                        setTimeout(function(){$('.loader').hide();}, 2000);
+                    }
+                }
+            });
+        }
+    });
+
+    //delete project
+    $('.delete-role').on("click", function(){
+        var role_id = $(this).data('rid');
+        if(confirm("Are you sure want to delete this role.")){
+            document.getElementsByClassName('card-body')[0].innerHTML += loader;
+            $.ajax({
+                url: './php_files/roles.php',
+                type: 'POST',
+                data: {role_delete:role_id},
+                dataType: 'json',
+                success: function(data){
+                    if(data.hasOwnProperty('success')){
+                        messageShow("<div class='alert alert-success'>Data deleted successfully.</div>");
+                        setTimeout(function(){ window.location='manage-roles.php';}, 2000);
+                      }else{
+                        messageShow("<div class='alert alert-danger'>"+data.error+"</div>");
+                        setTimeout(function(){$('.loader').hide();}, 2000);
+                    }
+                }
+            });
+        }
+    });
+
+
+//add user
+$('#add-user').on("submit", function(e){
+    e.preventDefault();
+    var first_name = $('.first_name').val();
+    var last_name = $('.last_name').val();
+    var email = $('.email').val();
+    var username = $('.username').val();
+    var password = $('.password').val();
+    var roles = $('.roles').val();
+    if(first_name == ''){
+        messageShow("<div class='alert alert-danger'>Name Field is Empty.</div>");
+    }else if(last_name == ''){
+        messageShow("<div class='alert alert-danger'>Email Field is Empty.</div>");
+    }else if(email == ''){
+        messageShow("<div class='alert alert-danger'>Phone Field is Empty.</div>");
+    }else if(username == ''){
+        messageShow("<div class='alert alert-danger'>Address Field is Empty.</div>");
+    }else if(password == ''){
+        messageShow("<div class='alert alert-danger'>Username Field is Empty.</div>");
+    }else if(roles == ''){
+        messageShow("<div class='alert alert-danger'>Username Field is Empty.</div>");
+    }else{
+        var formdata = new FormData(this);
+        formdata.append('add-user',1);
+        document.getElementsByClassName('card-body')[0].innerHTML += loader;
+        $.ajax({
+            url: './php_files/users.php',
+            type: 'POST',
+            data: formdata,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function(data){
+                if(data.hasOwnProperty('success')){
+                    messageShow("<div class='alert alert-success'>Saved successfully.</div>");
+                    setTimeout(function(){ window.location='manage-users.php';}, 2000);
+                  }else{
+                    messageShow("<div class='alert alert-danger'>"+data.error+"</div>");
+                    setTimeout(function(){$('.loader').hide();}, 2000);
+                }
+            }
+        });
+    }
+});
+
+
+//update projects
+$('#update-user').on("submit", function(e){
+    e.preventDefault();
+    var first_name = $('.first_name').val();
+    var last_name = $('.last_name').val();
+    var email = $('.email').val();
+    var username = $('.username').val();
+    var password = $('.password').val();
+    var roles = $('.roles').val();
+    if(first_name == ''){
+        messageShow("<div class='alert alert-danger'>Name Field is Empty.</div>");
+    }else if(last_name == ''){
+        messageShow("<div class='alert alert-danger'>Email Field is Empty.</div>");
+    }else if(email == ''){
+        messageShow("<div class='alert alert-danger'>Phone Field is Empty.</div>");
+    }else if(username == ''){
+        messageShow("<div class='alert alert-danger'>Address Field is Empty.</div>");
+    }else if(password == ''){
+        messageShow("<div class='alert alert-danger'>Username Field is Empty.</div>");
+    }else if(roles == ''){
+        messageShow("<div class='alert alert-danger'>Username Field is Empty.</div>");
+    }else{
+        var formdata = new FormData(this);
+        formdata.append('update-user',1);
+        document.getElementsByClassName('card-body')[0].innerHTML += loader;
+        $.ajax({
+            url: './php_files/users.php',
+            type: 'POST',
+            data: formdata,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function(data){
+                if(data.hasOwnProperty('success')){
+                    messageShow("<div class='alert alert-success'>Updated successfully.</div>");
+                    setTimeout(function(){ window.location='manage-users.php';}, 2000);
+                  }else{
+                    messageShow("<div class='alert alert-danger'>"+data.error+"</div>");
+                    setTimeout(function(){$('.loader').hide();}, 2000);
+                }
+            }
+        });
+    }
+});
+
+
+
+
     //add project
     $('#add-project').on("submit", function(e){
         e.preventDefault();

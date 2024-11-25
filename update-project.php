@@ -49,14 +49,31 @@ include "header.php" ?>
               </div>
               <div class="form-group">
                   <label>Delivery Manager</label>
-                  <input type="hidden" name="cat_id" value="<?php echo $row['id']; ?>" required>
-                  <input type="text" class="form-control deliveryManager" placeholder="Delivery Manager" name="deliveryManager" value="<?php echo $row['deliveryManager']; ?>" required>
-              </div>
+                  <?php
+                    $db->select('users','users.id as uid, firstName, lastName','roles on users.role = roles.id',"roles.shortName = 'DM'",null,null);
+                    $result1 = $db->getResult();
+                    if(count($result1) > 0){ ?>
+                    <select class="form-control role" name="deliveryManager" id="" required>
+                      <option value="">Select</option>
+                      <?php foreach($result1 as $row1) { ?>
+                      <option value="<?php echo $row1['uid']; ?>" <?php if($row['deliveryManager']==$row1['uid']){echo "selected";} ?>><?php echo $row1['firstName']. ' '. $row1['lastName']; ?></option>
+                      <?php } ?>
+                    </select>
+                  <?php } ?>
+                </div>
               <div class="form-group">
                   <label>Project Manager</label>
-                  <input type="hidden" name="cat_id" value="<?php echo $row['id']; ?>" required>
-                  <input type="text" class="form-control projectManager" placeholder="Project Manager" name="projectManager" value="<?php echo $row['projectManager']; ?>" required>
-              </div>
+                  <?php
+                    $db->select('users','users.id as uid, firstName, lastName','roles on users.role = roles.id',"roles.shortName = 'PM'",null,null);
+                    $result1 = $db->getResult();
+                    if(count($result1) > 0){ ?>
+                    <select class="form-control role" name="projectManager" id="" required>
+                      <option value="">Select</option>
+                      <?php foreach($result1 as $row1) { ?>
+                      <option value="<?php echo $row1['uid']; ?>" <?php if($row['projectManager']==$row1['uid']){echo "selected";} ?>><?php echo $row1['firstName']. ' '. $row1['lastName']; ?></option>
+                      <?php } ?>
+                    </select>
+                  <?php } ?>              </div>
               <div class="form-group">
                   <label>Remark</label>
                   <input type="hidden" name="cat_id" value="<?php echo $row['id']; ?>" required>

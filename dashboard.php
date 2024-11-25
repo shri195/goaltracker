@@ -8,8 +8,12 @@ include "header.php";
             <div class="col-md-3">
               <?php 
                 $db = new Database();
-
-                $db->sql("SELECT COUNT(*) AS tot_project FROM projects;");
+                $where = 1;
+                if(isset($_SESSION['role']) &&  $_SESSION['role'] =="DM"){
+                  $where = "projects.deliveryManager = ".$_SESSION['admin_id'];
+                }
+  
+                $db->sql("SELECT COUNT(*) AS tot_project FROM projects WHERE $where;");
                 $result = $db->getResult();
                 if(!empty($result)){
                   foreach($result as $row){
@@ -92,7 +96,8 @@ include "header.php";
 
         </div>
     </div>
-    <?php if($_SESSION['admin_id'] != 3) { ?>
+    <?php
+    if(in_array($_SESSION['role'],$adminArray)) { ?>
     <div class="row">
       <div class="col-md-12">
         <div class="card mt-4">
@@ -102,7 +107,11 @@ include "header.php";
           <div class="card-body table-responsive">
             <?php 
               $db = new Database();
-              $db->select('projects','*',null,"status=1","projects.id DESC","5");
+              $where = "status=1";
+              if(isset($_SESSION['role']) &&  $_SESSION['role'] =="DM"){
+                $where .= " AND projects.deliveryManager = ".$_SESSION['admin_id'];
+              }
+              $db->select('projects','projects.id as id, projects.name, projects.account, projects.deliveryUnit, projects.remark,  projects.status, delivery_manager.firstName as DMFirst, project_manager.firstName as PMFirst, delivery_manager.lastName as DMLast, project_manager.lastName as PMLast',"users AS delivery_manager ON projects.deliveryManager = delivery_manager.id JOIN users AS project_manager ON projects.projectManager = project_manager.id",$where,'projects.id DESC',5);
               $result = $db->getResult();
             ?>
             <table class="table table-bordered">
@@ -136,8 +145,8 @@ include "header.php";
                     } ?>
                     </td>
                     <td><?php echo $row['deliveryUnit']; ?></td>
-                    <td><?php echo $row['deliveryManager']; ?></td>
-                    <td><?php echo $row['projectManager']; ?></td>
+                    <td><?php echo $row['DMFirst'], ' '.$row['DMLast']; ?></td>
+                    <td><?php echo $row['PMFirst'], ' '.$row['PMLast']; ?></td>
                     <td><?php echo $row['remark']; ?></td>
                     <td>
                       <?php
