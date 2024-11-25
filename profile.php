@@ -9,8 +9,9 @@ include "header.php" ?>
         </div>
         <div class="card-body position-relative">
           <?php
+              $where = "users.id = ".$_SESSION['admin_id'];
               $db = new Database();
-              $db->select('admin','*',null,null,null,null);
+              $db->select('users','*',null,$where,null,null);
               $result = $db->getResult();
               if($result > 0){
                 foreach ($result as $row) {
@@ -18,29 +19,26 @@ include "header.php" ?>
           <form class="yourform" id="update-profile" action="<?php $_SERVER['PHP_SELF']; ?>" method="post" autocomplete="off">
               <div class="form-group">
                   <label>Name</label>
-                  <input type="hidden" name="admin_id" value="<?php echo $row['admin_id']; ?>">
-                  <input type="text" class="form-control name" name="name" value="<?php echo $row['admin_fullname']; ?>" required>
+                  <input type="hidden" name="admin_id" value="<?php echo $row['id']; ?>">
+                  <input type="text" class="form-control firstName" name="firstName" value="<?php echo $row['firstName']; ?>" required>
+              </div>
+              <div class="form-group">
+                  <label>Name</label>
+                  <input type="hidden" name="admin_id" value="<?php echo $row['id']; ?>">
+                  <input type="text" class="form-control lastName" name="lastName" value="<?php echo $row['lastName']; ?>" required>
               </div>
               <div class="form-group">
                   <label>Email</label>
-                  <input type="email" class="form-control email" name="email" value="<?php echo $row['admin_email']; ?>" required>
-              </div>
-              <div class="form-group">
-                  <label>Phone</label>
-                  <input type="number" class="form-control phone" name="phone" value="<?php echo $row['admin_phone']; ?>" required>
-              </div>
-              <div class="form-group">
-                  <label>Address</label>
-                  <input type="text" class="form-control address" name="address" value="<?php echo $row['admin_address']; ?>" required>
+                  <input type="email" class="form-control email" name="email" value="<?php echo $row['email']; ?>" required>
               </div>
               <div class="form-group">
                   <label>Username</label>
-                  <input type="text" class="form-control username" name="username" value="<?php echo $row['admin_username']; ?>" required>
+                  <input type="text" class="form-control username" name="username" value="<?php echo $row['username']; ?>" required>
               </div>
               <div class="form-group">
                   <label>Password</label>
                   <input type="password" class="form-control" name="new_password" value="">
-                  <input type="hidden" class="form-control" placeholder="" value="<?php echo $row['admin_password']; ?>" name="old_password" required>
+                  <input type="hidden" class="form-control" placeholder="" value="<?php echo $row['password']; ?>" name="old_password" required>
                   <small>( Leave password empty if not change in password. )</small>
               </div>
               <input type="submit" name="save" class="btn btn-dark float-right" value="Update" required>

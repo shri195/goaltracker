@@ -16,11 +16,11 @@
         foreach($result as $row){
             $projectid = $row['project'];
             $projectName = $dmName = "";
-            $db->select('projects','name, deliveryManager',null,"id=$projectid",null,null);
+            $db->select('projects','name, deliveryManager, firstName, lastName',"users ON projects.deliveryManager=users.id","projects.id=$projectid",null,null);
             $result1 = $db->getResult();
             if(!empty($result1)){
                 $projectName = $result1[0]['name'];
-                $dmName = $result1[0]['deliveryManager'];
+                $dmName = $result1[0]['firstName'].' '.$result1[0]['lastName'];
             }
             $row['project'] = '<span>'.$projectName.'</span>';
             $row['sprintReleaseName'] = '<span>'.$row['sprintReleaseName'].'</span>';

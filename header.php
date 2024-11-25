@@ -16,7 +16,7 @@
     $db->select('settings','*',null,null,null,null);
     $result = $db->getResult();
 
-    $adminArray =  array('admin', 'DM');
+    $adminArray =  array('admin', 'DM', 'QN');
   
 ?>
 <html lang="en">
@@ -110,9 +110,7 @@
                                 Hi, <?php echo $_SESSION['admin_fullname']; ?>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <?php if($_SESSION['role'] == 'admin') { ?>
                               <a class="dropdown-item" href="profile.php">My Profile</a>
-                              <?php } ?>
                               <a class="dropdown-item logout" href="#">Log Out</a>
                             </div>
                         </div>

@@ -12,6 +12,11 @@ include "header.php";
                 if(isset($_SESSION['role']) &&  $_SESSION['role'] =="DM"){
                   $where = "projects.deliveryManager = ".$_SESSION['admin_id'];
                 }
+
+                $join = "";
+                if(isset($_SESSION['role']) &&  $_SESSION['role'] =="DM"){
+                  $join = " JOIN projects ON goals.project = projects.id AND projects.deliveryManager = ".$_SESSION['admin_id'];
+                }
   
                 $db->sql("SELECT COUNT(*) AS tot_project FROM projects WHERE $where;");
                 $result = $db->getResult();
@@ -34,7 +39,7 @@ include "header.php";
               <?php 
                 $db = new Database();
 
-                $db->sql("SELECT COUNT(*) AS ini_goal FROM goals WHERE goalStatus=1;");
+                $db->sql("SELECT COUNT(*) AS ini_goal FROM goals $join WHERE goalStatus=1;");
                 $result = $db->getResult();
                 if(!empty($result)){
                   foreach($result as $row){
@@ -55,7 +60,7 @@ include "header.php";
               <?php 
                 $db = new Database();
 
-                $db->sql("SELECT COUNT(*) AS review_goal FROM goals WHERE goalStatus=3");
+                $db->sql("SELECT COUNT(*) AS review_goal FROM goals $join WHERE goalStatus=3");
                 $result = $db->getResult();
                 if(!empty($result)){
                   foreach($result as $row){
@@ -76,7 +81,7 @@ include "header.php";
               <?php 
                 $db = new Database();
 
-                $db->sql("SELECT COUNT(*) AS closure_goal FROM goals WHERE goalStatus=4");
+                $db->sql("SELECT COUNT(*) AS closure_goal FROM goals $join WHERE goalStatus=4");
                 $result = $db->getResult();
                 if(!empty($result)){
                   foreach($result as $row){

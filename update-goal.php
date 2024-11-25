@@ -27,7 +27,11 @@ include "header.php" ?>
                   <label>Project Name</label>
                   <input type="hidden" name="cat_id" value="<?php echo $row['id']; ?>" required>
                   <?php
-                    $db->select('projects','*',null,null,null,null);
+                  $where = "status=1";
+                  if(isset($_SESSION['role']) &&  $_SESSION['role'] =="DM"){
+                    $where .= " AND projects.deliveryManager = ".$_SESSION['admin_id'];
+                  }
+                    $db->select('projects','*',null,$where,null,null);
                     $result1 = $db->getResult();
                     if(count($result1) > 0){ ?>
                     <select class="form-control project" name="project" id="">
@@ -166,7 +170,7 @@ include "header.php" ?>
                   <select class="form-control goalStatus" name="goalStatus" id="">
                     <option value="1" <?php echo $row['goalStatus'] == 1 ? "selected": ''; ?>>Initiated</option>
                     <option value="2" <?php echo $row['goalStatus'] == 2 ? "selected": ''; ?>>In Progress</option>
-                    <?php if($_SESSION['admin_id'] != 3) { ?>
+                    <?php if($_SESSION['role'] == "QN") { ?>
                     <option value="3" <?php echo $row['goalStatus'] == 3 ? "selected": ''; ?>>In Review</option>
                     <option value="4" <?php echo $row['goalStatus'] == 4 ? "selected": ''; ?>>In Closure</option>
                     <option value="0" <?php echo $row['goalStatus'] == 0 ? "selected": ''; ?>>Defaulter</option>

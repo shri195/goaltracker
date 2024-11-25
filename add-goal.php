@@ -18,7 +18,11 @@ include "header.php" ?>
               <div class="form-group">
                 <label>Project Name</label>
                 <?php
-                    $db->select('projects','*',null,"status=1",null,null);
+                  $where = "status=1";
+                    if(isset($_SESSION['role']) &&  $_SESSION['role'] =="DM"){
+                      $where .= " AND projects.deliveryManager = ".$_SESSION['admin_id'];
+                    }
+                    $db->select('projects','*',null,$where,null,null);
                     $result1 = $db->getResult();
                     if(count($result1) > 0){ ?>
                     <select class="form-control project" name="project" id="">
@@ -132,7 +136,7 @@ include "header.php" ?>
                 <select class="form-control goalStatus" name="goalStatus" id="">
                   <option value="1">Initiated</option>
                   <option value="2">In Progress</option>
-                  <?php if($_SESSION['admin_id'] != 3) { ?>
+                  <?php if($_SESSION['role'] == "QN") { ?>
                   <option value="3">In Review</option>
                   <option value="4">In Closure</option>
                   <option value="0">Defaulter</option>

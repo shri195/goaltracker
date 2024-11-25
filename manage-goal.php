@@ -15,8 +15,12 @@ include "header.php" ?>
               if(isset($_GET['pid'])) {
                 $where = "goals.project = ".$_GET['pid'];
               }
+              $join = "";
+              if(isset($_SESSION['role']) &&  $_SESSION['role'] =="DM"){
+                $join = " projects ON goals.project = projects.id AND projects.deliveryManager = ".$_SESSION['admin_id'];
+              }
               $db = new Database();
-              $db->select('goals','*',null,$where,'goals.id DESC',null);
+              $db->select('goals','*',$join,$where,'goals.id DESC',null);
               $result = $db->getResult();
             ?>
             <table class="table-data table table-bordered">
