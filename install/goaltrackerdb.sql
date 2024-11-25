@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 02, 2024 at 01:14 PM
+-- Generation Time: Nov 25, 2024 at 08:30 AM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.10
 
@@ -65,16 +65,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `admin_username` varchar(255) NOT NULL,
   `admin_password` varchar(255) NOT NULL,
   PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`admin_id`, `admin_fullname`, `admin_email`, `admin_phone`, `admin_address`, `admin_username`, `admin_password`) VALUES
-(1, 'Admin User', 'admin1@yopmail.com', '9999199991', 'Pune', 'admin', '21232f297a57a5a743894a0e4a801fc3'),
-(2, 'QN User', 'qnuser1@yopmail.com', '9999199991', 'Pune', 'qnuser', '21232f297a57a5a743894a0e4a801fc3'),
-(3, 'DM User', 'dmuser1@yopmail.com', '9999199991', 'Pune', 'dmuser', '21232f297a57a5a743894a0e4a801fc3');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -118,15 +109,14 @@ CREATE TABLE IF NOT EXISTS `goals` (
   `createdBy` int(11) DEFAULT NULL,
   `goaETA` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `goals`
 --
 
 INSERT INTO `goals` (`id`, `project`, `name`, `sprintReleaseName`, `smStartDate`, `smEndDate`, `scaStatus`, `codeReview`, `utsRatio`, `utcCount`, `codeCoverage`, `dmInjection`, `dmDefects`, `dmDER`, `dmRegressionDefects`, `dmReopenDefects`, `bvtSanityRatio`, `performanceLoadingTime`, `defaultSecurityCount`, `functionalTestCoverage`, `functionalTestCaseCount`, `functionTestRatio`, `sprintSuccessRatio`, `sprintVelocity`, `dmdhNotes`, `qnNotes`, `createdAt`, `modifiedAt`, `goalStatus`, `isLatest`, `modifiedBy`, `createdBy`, `goaETA`) VALUES
-(1, 1, 'Sprint1', 'Sprint1', '2024-11-02 00:00:00', '2024-11-12 00:00:00', 1, '', 98, '', 90, '', '', 1, '0', '0', 100, 0, 0, 98, '', 98, 98, '2', 'Ok', 'Good', '2024-11-02 06:23:35', '2024-11-02 07:30:29', 4, 1, 1, 1, '2024-11-02 00:00:00'),
-(2, 1, 'Sprint2', 'Sprint2', '2024-10-10 00:00:00', '2024-10-20 00:00:00', 1, '', 99, '', 99, '', '', 2, '0', '0', 100, 0, 0, 99, '', 99, 99, '4', 'Good', 'Average', '2024-11-02 07:29:21', NULL, 1, 1, NULL, 1, '2024-11-02 00:00:00');
+(1, 1, 'Sprint 22', 'Sprint 22', '2024-11-06 00:00:00', '2024-11-19 00:00:00', 1, '1', 99, '1', 90, '0', '0', 0, '0', '0', 100, 0, 0, 96, '1', 95, 99, '99', 'Ok', 'Ok', '2024-11-25 02:55:58', '2024-11-25 02:57:36', 3, 1, 2, 3, '2024-11-25 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -149,18 +139,41 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `modifiedAt` timestamp NULL DEFAULT NULL,
   `modifiedBy` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `projects`
 --
 
 INSERT INTO `projects` (`id`, `name`, `account`, `deliveryUnit`, `deliveryManager`, `projectManager`, `remark`, `status`, `createdAt`, `createdBy`, `modifiedAt`, `modifiedBy`) VALUES
-(1, 'Careerminds', 3, 'Delivery Unit 1', 'Dhara Masani', 'Anita Lad', 'Ok', 1, '2024-10-29 05:34:39', 1, NULL, NULL),
-(2, 'OpenSesame', 3, 'Delivery Unit 2', 'Naina Gandhe', 'Vivek Shiradhonkar', 'Ok', 1, '2024-10-29 05:36:04', 1, NULL, NULL),
-(3, 'KLD', 3, 'Delivery Unit 1', 'Swapnil Pandhare', 'Parthajeet Chakraborty', 'Ok', 1, '2024-10-29 05:37:08', 1, NULL, NULL),
-(5, 'Caron', 3, 'Content', 'Sagar Prasade', 'Pradeep Panwar', 'Ok', 1, '2024-10-29 05:38:46', 1, '2024-11-02 06:45:53', 1),
-(6, 'LearnAc', 3, 'Delivery Unit 2', 'Dipti Mane', 'Tanmay Deshmukh', 'Ok', 0, '2024-10-29 05:39:31', 1, '2024-10-29 05:39:40', 1);
+(1, 'Careerminds', 3, 'DU2', '3', '5', 'Ok', 1, '2024-11-25 02:51:52', 1, NULL, NULL),
+(2, 'OpenSesame', 3, 'DU1', '4', '6', 'Ok', 1, '2024-11-25 02:53:18', 2, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roleName` varchar(55) DEFAULT NULL,
+  `shortName` varchar(55) NOT NULL,
+  `createdAt` datetime DEFAULT NULL,
+  `createdBy` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `roleName`, `shortName`, `createdAt`, `createdBy`) VALUES
+(1, 'Admin', 'admin', '2024-11-25 00:00:00', NULL),
+(2, 'Quality Nexus', 'QN', '2024-11-25 00:00:00', NULL),
+(3, 'Delivery Manager', 'DM', '2024-11-25 00:00:00', NULL),
+(4, 'Project Manager', 'PM', '2024-11-25 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -182,6 +195,39 @@ CREATE TABLE IF NOT EXISTS `settings` (
 
 INSERT INTO `settings` (`site_id`, `site_name`, `site_logo`) VALUES
 (1, 'Goal Tracker', '1730186890harbinger-logo.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(255) DEFAULT NULL,
+  `lastName` varchar(255) DEFAULT NULL,
+  `username` varchar(100) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` int(11) NOT NULL,
+  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `firstName`, `lastName`, `username`, `email`, `password`, `role`, `createdAt`, `updatedAt`) VALUES
+(1, 'Admin', 'User', 'admin', 'admin.user@yopmail.com', 'admin', 1, '2024-11-25 08:14:44', '2024-11-25 08:14:44'),
+(2, 'Rashmi', 'Kulkarni', 'rashmi.kulkarni', 'rashmi.kulkarni@harbingergroup.com', 'Test@1234', 2, '2024-11-25 02:48:17', '2024-11-25 08:18:17'),
+(3, 'Dhara', 'Masani', 'dhara.masani', 'dhara.masani@harbingergroup.com', 'Test@1234', 3, '2024-11-25 02:49:04', '2024-11-25 08:19:04'),
+(4, 'Naina', 'Gandhe', 'naina.gandhe', 'naina.gandhe@harbingergroup.com', 'Test@1234', 3, '2024-11-25 02:50:00', '2024-11-25 08:20:00'),
+(5, 'Anita', 'Lad', 'anita.lad', 'anita.lad@harbingergroup.com', 'Test@1234', 4, '2024-11-25 02:50:30', '2024-11-25 08:20:30'),
+(6, 'Vivek', 'Shiradhonkar', 'viveks', 'viveks@harbingergroup.com', 'Test@1234', 4, '2024-11-25 02:51:03', '2024-11-25 08:21:03');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
